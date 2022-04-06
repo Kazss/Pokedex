@@ -4,7 +4,7 @@ import { Card } from '../components/Card';
 import { ListCard } from '../components/ListCard';
 import { api } from '../services/api';
 import { PokeurlImage } from '../utils/staticPoke';
-import { ContentContainer } from './styles';
+import { ContentContainer } from '../styles/styles';
 
 interface IPokemonList {
   name: string;
