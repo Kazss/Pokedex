@@ -33,6 +33,8 @@ This project was developed to practice and improve the creation of applications 
 In this application, the user can consult information by clicking on the name of each Pokémon available.
 There are 151 pokemon available.
 
+> See the Pokedex right now: https://pokedex-32b8mfg4g-kazss.vercel.app/
+
 ## 🔖 Layout
 
 - [Layout Web](https://i.postimg.cc/Ssq0QyJq/image.png)
