@@ -46,6 +46,10 @@ export const NavigationList = styled.nav`
         justify-content: center;
     }
   }
+
+  @media (min-width: 721px) {
+    max-height: 36.875rem;
+  }
 `;
 
 export const PokemonList = styled.li<PokemonListProps>`
