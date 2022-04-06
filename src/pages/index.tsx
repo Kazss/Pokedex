@@ -1,24 +1,28 @@
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
 import { Card } from '../components/Card';
 import { ListCard } from '../components/ListCard';
+import { api } from '../services/api';
+import { PokeurlImage } from '../utils/staticPoke';
 import { ContentContainer } from './styles';
 
-
-
-interface IPokemonNameProps {
+interface IPokemonList {
   name: string;
+  url: string;
+  urlImage: string;
+}[]
+
+interface HomeProps {
+  pokemonList: {
+    name: string;
+    url: string;
+    urlImage: string;
+  }[]
 }
 
 
-export default function Home() {
-  const [pokemonName, setPokemonName] = useState<IPokemonNameProps>();
+export default function Home({ pokemonList }: HomeProps) {
 
-
-  async function handleAddPokemonData(value: IPokemonNameProps) {
-    setPokemonName(value);
-
-  }
 
   return (
     <>
@@ -28,10 +32,41 @@ export default function Home() {
       </Head>
 
       <ContentContainer>
-        <Card pokemonName={pokemonName} />
-        <ListCard handleAddPokemonData={setPokemonName} />
+        <Card />
+        <ListCard pokemonList={pokemonList} />
       </ContentContainer>
 
     </>
   )
+}
+
+
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { data } = await api.get('?offset=0&limit=151');
+
+  const FilteringUrlPokemon: IPokemonList[] = data.results.map((resultsData: { name: string; url: string; urlImage: string; }) => {
+    return {
+      name: resultsData.name,
+      url: resultsData.url.replace(/\/+$/, ''),
+      urlImage: resultsData.urlImage,
+    }
+  })
+
+  const filteredPokemonList: IPokemonList[] = FilteringUrlPokemon.map(resultsData => {
+    return {
+      name: resultsData.name,
+      url: resultsData.url,
+      urlImage: PokeurlImage + resultsData.url.substring(resultsData.url.lastIndexOf('/') + 1) + '.png'
+    }
+  })
+
+  const pokemonList = filteredPokemonList
+
+  return {
+    props: {
+      pokemonList
+    },
+    revalidate: 60 * 60 * 24, // 24 hours
+  }
 }

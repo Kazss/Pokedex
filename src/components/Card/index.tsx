@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { usePokemon } from '../../hooks';
 import { api } from '../../services/api';
-import { PokemonCard, PokemonCardBody, PokemonCardBodyInfo, PokemonCardHeader, PokemonCardHeaderDetails, PokemonCardHeaderImage, PokemonCardHeaderTypes } from './styles';
-
-
-
+import { bgColor, pokeballimg, staticPokeData } from '../../utils/staticPoke';
+import {
+  PokemonCard, PokemonCardBody,
+  PokemonCardBodyInfo, PokemonCardHeader,
+  PokemonCardHeaderDetails, PokemonCardHeaderImage,
+  PokemonCardHeaderTypes
+} from './styles';
 
 interface ITypes {
   type: {
@@ -19,7 +23,6 @@ interface ISprite {
     }
   }
 }
-
 
 interface IBaseStats {
   base_stat: string;
@@ -44,64 +47,22 @@ interface PokemonDataProps {
 }
 
 
-interface IPokemonNameProps {
-  name: string;
-}
-
-
-interface CardProps {
-  pokemonName: IPokemonNameProps;
-}
-
-export function Card({ pokemonName }: CardProps) {
+export function Card() {
+  const { pokemonName } = usePokemon();
   const [pokemonData, setPokemonData] = useState<PokemonDataProps>();
   const [currentBgColor, setCurrentBgColor] = useState('');
-  const [bgColor, setBgColor] = useState({
-    normal: "#A8A878",
-    fire: "#F08030",
-    fighting: "#C03028",
-    water: "#6890F0",
-    flying: "#A890F0",
-    grass: "#78C850",
-    poison: "#A040A0",
-    electric: "#F8D030",
-    ground: "#E0C068",
-    psychic: "#F85888",
-    rock: "#B8A038",
-    ice: "#98D8D8",
-    bug: "#A8B820",
-    dragon: "#7038F8",  
-    ghost: "#705898",
-    dark: "#705848",
-    steel: "#B8B8D0", 
-    fairy: "#EE99AC"
-  })
-  const imageLink = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png';
-  const pokeballimg = 'https://i.postimg.cc/25tpYM1w/pokebola.png';
-
   useEffect(() => {
     function getBackgroundColor() {
       const name = pokemonData?.types[0].type.name;
-
       setCurrentBgColor(bgColor[name]);
-
-
     }
-
     getBackgroundColor();
-  }, [bgColor, pokemonData?.types])
+  }, [pokemonData?.types])
 
   useEffect(() => {
-
-  
-
     async function getPokemonData() {
-      const { data } = await api.get<PokemonDataProps>(`${pokemonName?.name}`);
-
-
-
+      const { data } = await api.get<PokemonDataProps>(`${pokemonName}`);
       setPokemonData(data);
-
     }
 
     if (pokemonName) {
@@ -118,8 +79,8 @@ export function Card({ pokemonName }: CardProps) {
 
       <PokemonCardHeader icon={pokeballimg}>
         <PokemonCardHeaderDetails>
-          <h2>{pokemonData?.name ? pokemonData.name : 'Bulbasaur'}</h2>
-          <span>#{pokemonData?.id ? pokemonData.id : '1'}</span>
+          <h2>{pokemonData?.name ? pokemonData.name : staticPokeData.name}</h2>
+          <span>#{pokemonData?.id ? pokemonData.id : staticPokeData.id}</span>
         </PokemonCardHeaderDetails>
         <PokemonCardHeaderTypes >
           {pokemonData?.types ? (
@@ -127,8 +88,8 @@ export function Card({ pokemonName }: CardProps) {
               <span key={data.type.name}>{data.type.name}</span>
             ))) :
             <>
-              <span>grass</span>
-              <span>poison</span>
+              <span>{staticPokeData.type[0].name}</span>
+              <span>{staticPokeData.type[1].name}</span>
             </>
           }
         </PokemonCardHeaderTypes>
@@ -136,7 +97,7 @@ export function Card({ pokemonName }: CardProps) {
         <PokemonCardHeaderImage>
           <Image
             src={pokemonData?.sprites.other['official-artwork'].front_default ?
-              pokemonData.sprites.other['official-artwork'].front_default : imageLink}
+              pokemonData.sprites.other['official-artwork'].front_default : staticPokeData.urlImg}
             alt={pokemonData?.name} width={350}
             height={350} />
         </PokemonCardHeaderImage>
@@ -152,17 +113,12 @@ export function Card({ pokemonName }: CardProps) {
               <ul key={data.stat.name}>
                 <li>{data.stat.name}: {data.base_stat}</li>
               </ul>
-
             ))) :
-
-            <ul>
-              <li>HP: 45</li>
-              <li>Attack: 49</li>
-              <li>Defense: 49</li>
-              <li>Special-attack: 65</li>
-              <li>Special-defense: 45</li>
-              <li>Speed: 45</li>
-            </ul>
+            staticPokeData.stats.map(data => (
+              <ul key={data.stat.name}>
+                <li>{data.stat.name}: {data.base_stat}</li>
+              </ul>
+            ))
           }
         </PokemonCardBodyInfo>
         <PokemonCardBodyInfo>
@@ -174,10 +130,11 @@ export function Card({ pokemonName }: CardProps) {
               </ul>
 
             ))) :
-            <ul>
-              <li>Overgrow</li>
-              <li>Chlorophyll</li>
-            </ul>
+            staticPokeData.abilities.map(data => (
+              <ul key={data.name}>
+                <li>{data.name}</li>
+              </ul>
+            ))
           }
         </PokemonCardBodyInfo>
       </PokemonCardBody>
