@@ -1,6 +1,4 @@
-import styled from "styled-components";
-
-export const ContentContainer = styled.main`
+.contentContainer {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -8,8 +6,16 @@ export const ContentContainer = styled.main`
   gap: 1.875rem;
   padding: 1.875rem 0;
 
-  @media (max-width: 720px) {
+ 
+}
+
+
+@media (max-width: 720px) {
+  .contentContainer {
+ 
     flex-direction: column;
     padding: 1.875rem 0;
+  
+   
   }
-`
+}

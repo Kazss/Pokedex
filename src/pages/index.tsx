@@ -4,7 +4,7 @@ import { Card } from '../components/Card';
 import { ListCard } from '../components/ListCard';
 import { api } from '../services/api';
 import { PokeurlImage } from '../utils/staticPoke';
-import { ContentContainer } from '../styles/styles';
+import styles from '../styles/home.module.scss';
 
 interface IPokemonList {
   name: string;
@@ -31,10 +31,10 @@ export default function Home({ pokemonList }: HomeProps) {
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
 
-      <ContentContainer>
+      <main className={styles.contentContainer}>
         <Card />
         <ListCard pokemonList={pokemonList} />
-      </ContentContainer>
+      </main>
 
     </>
   )
