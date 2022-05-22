@@ -4,7 +4,10 @@ import { Card } from '../components/Card';
 import { ListCard } from '../components/ListCard';
 import { api } from '../services/api';
 import { PokeurlImage } from '../utils/staticPoke';
+import Switch from 'react-switch';
 import styles from '../styles/home.module.scss';
+import { ThemeContext } from 'styled-components';
+import { useContext } from 'react';
 
 interface IPokemonList {
   name: string;
@@ -17,11 +20,14 @@ interface HomeProps {
     name: string;
     url: string;
     urlImage: string;
-  }[]
+  }[],
+  toggleTheme(): void;
 }
 
 
-export default function Home({ pokemonList }: HomeProps) {
+export default function Home({ pokemonList, toggleTheme }: HomeProps) {
+
+  const { title } = useContext(ThemeContext);
 
 
   return (
@@ -34,6 +40,20 @@ export default function Home({ pokemonList }: HomeProps) {
       <main className={styles.contentContainer}>
         <Card />
         <ListCard pokemonList={pokemonList} />
+        <label>
+          <Switch
+            onChange={toggleTheme}
+            checked={title === 'dark'}
+            checkedIcon={false}
+            uncheckedIcon={false}
+            height={10}
+            width={40}
+            handleDiameter={20}
+            offColor={'#005'}
+            onColor={'#fff'}
+          />
+        </label>
+
       </main>
 
     </>
@@ -53,6 +73,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   })
 
+
   const filteredPokemonList: IPokemonList[] = FilteringUrlPokemon.map(resultsData => {
     return {
       name: resultsData.name,
@@ -61,7 +82,9 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   })
 
-  const pokemonList = filteredPokemonList
+  const pokemonList = filteredPokemonList;
+
+  console.log(pokemonList)
 
   return {
     props: {

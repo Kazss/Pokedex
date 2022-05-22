@@ -2,13 +2,18 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --default-background: #6B727A;
-    --active-background: #e96a6c;
-    --scrollbar-background: #c4c7cc;
-    --border-bottom-50: #C3C4C5;    
-    --border-bottom-100: #6b727a;    
-    --background: #DADFE8;
-    --shape: #ffffff;
+    // Global Background
+    --background: ${props => props.theme.colors.background};
+
+    // List Style
+    --list-default-background: ${props => props.theme.colors.list_default_background};
+    --list-active-background: ${props => props.theme.colors.list_active_background};
+    --list-scrollbar-background: ${props => props.theme.colors.list_scrollbar_background};
+
+    // Card Style
+    --border-bottom-50: ${props => props.theme.colors.border_bottom_50};    
+    --border-bottom-100: ${props => props.theme.colors.border_bottom_100};    
+    --card-background-shape: ${props => props.theme.colors.card_background_shape};    
   }
 
   * {

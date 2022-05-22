@@ -27,7 +27,7 @@ export const PokemonCardHeader = styled.div<PokemonCardHeaderProps>`
 `;
 
 export const PokemonCardHeaderDetails = styled.div`
-    color: var(--shape);
+    color: var(--card-background-shape);
     display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -44,7 +44,7 @@ export const PokemonCardHeaderDetails = styled.div`
 export const PokemonCardHeaderTypes = styled.div`
   span {
       font-size: 0.8rem;
-		    background-color: var(--shape);
+		    background-color: var(--card-background-shape);
 		    opacity: 0.7;
 		    border-radius: 0.5rem;
         width: fit-content;
@@ -68,7 +68,7 @@ export const PokemonCardHeaderImage = styled.div`
 
 
 export const PokemonCardBody = styled.div`
-    background-color: var(--shape);
+    background-color: var(--card-background-shape);
 		display: flex;
 		justify-content: space-between;
 		padding: 3.125rem 1.875rem 3.125rem;

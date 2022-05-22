@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { usePokemon } from '../../hooks';
+import { usePokemon } from '../../hooks/usePokemon';
 import { api } from '../../services/api';
 import { bgColor, pokeballimg, staticPokeData } from '../../utils/staticPoke';
 import {
@@ -51,6 +51,7 @@ export function Card() {
   const { pokemonName } = usePokemon();
   const [pokemonData, setPokemonData] = useState<PokemonDataProps>();
   const [currentBgColor, setCurrentBgColor] = useState('');
+  
   useEffect(() => {
     function getBackgroundColor() {
       const name = pokemonData?.types[0].type.name;

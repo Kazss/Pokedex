@@ -22,7 +22,7 @@ export const NavigationList = styled.nav`
     width: 2.2vh;
   }
   &::-webkit-scrollbar-track {
-    background: var(--scrollbar-background);
+    background: var(--list-scrollbar-background);
     border-radius: 1.25rem;
     margin-bottom: .5rem;
   }
@@ -36,7 +36,7 @@ export const NavigationList = styled.nav`
   }
 
   @media (max-width: 720px) {
-    max-width: 21.875rem;
+    max-width: 15.875rem;
 
     ul {
         display: flex;
@@ -59,8 +59,8 @@ export const PokemonList = styled.li<PokemonListProps>`
 		margin-bottom: 0.625rem;
 		margin: 0.625rem;
     background-color: ${props =>
-    props.WhichPokemon === props.pokemonType ? "var(--active-background)" : "var(--default-background)"};
-		color: var(--shape);
+    props.WhichPokemon === props.pokemonType ? "var(--list-active-background)" : "var(--list-default-background)"};
+		color: #fff;
 		padding: 0 0.7rem;
 		border-top-left-radius: 1.875rem;
 		border-bottom-left-radius: 1.875rem;

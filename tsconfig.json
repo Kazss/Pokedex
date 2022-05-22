@@ -19,6 +19,9 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
+  "files": [
+    "src/styles/styled.d.ts"
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",

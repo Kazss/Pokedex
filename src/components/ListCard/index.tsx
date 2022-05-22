@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { usePokemon } from '../../hooks';
+import { usePokemon } from '../../hooks/usePokemon';
 import { NavigationList, PokemonList } from './styles';
 
 
@@ -17,7 +17,6 @@ export function ListCard({ pokemonList }: ListCardProps) {
   const { pokemonName, putPokemonName } = usePokemon();
 
   const [activePokemon, setActivePokemon] = useState('bulbasaur');
-
 
   function handleAddPokeName(PokemonDataName: string) {
     setActivePokemon(PokemonDataName);
