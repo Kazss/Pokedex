@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePokemon } from '../../hooks/usePokemon';
 import { api } from '../../services/api';
@@ -96,11 +96,11 @@ export function Card() {
         </PokemonCardHeaderTypes>
 
         <PokemonCardHeaderImage>
-          <img
+          <Image
             src={pokemonData?.sprites.other['official-artwork'].front_default ?
               pokemonData.sprites.other['official-artwork'].front_default : staticPokeData.urlImg}
             alt={pokemonData?.name} width={350}
-            height={350} />
+            height={350} priority />
         </PokemonCardHeaderImage>
       </PokemonCardHeader>
 

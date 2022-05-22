@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import { useState } from 'react';
 import { usePokemon } from '../../hooks/usePokemon';
 import { NavigationList, PokemonList } from './styles';
@@ -18,6 +18,7 @@ export function ListCard({ pokemonList }: ListCardProps) {
 
   const [activePokemon, setActivePokemon] = useState('bulbasaur');
 
+
   function handleAddPokeName(PokemonDataName: string) {
     setActivePokemon(PokemonDataName);
     putPokemonName(PokemonDataName);
@@ -29,8 +30,12 @@ export function ListCard({ pokemonList }: ListCardProps) {
       <ul>
         {pokemonList?.map(pokemon => (
           <PokemonList WhichPokemon={activePokemon} pokemonType={pokemon.name} onClick={() => handleAddPokeName(pokemon.name)} key={pokemon.name}>
-            <img src={pokemon.urlImage} alt={pokemon.name} height={50} width={50} />
-            <span>{pokemon.name}</span>
+            <div>
+              <Image src={pokemon.urlImage} alt={pokemon.name} height="50" width="50" priority />
+            </div>
+            <div>
+              <span>{pokemon.name}</span>
+            </div>
           </PokemonList>
         ))}
       </ul>

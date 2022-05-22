@@ -71,11 +71,24 @@ export const PokemonList = styled.li<PokemonListProps>`
 
 		&:hover {
 			transform: scale(1.10);
-		}
-    
+		}   
+
+
+    div {
+      height: 50px;
+      width: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    div + div {
+      margin-left: 10px;
+    }
 		span {
-      font-size: 0.8rem;
-			padding: 0 0.7rem;
+      font-size: 0.6rem;
+		
 		}
 
     span:first-letter {
@@ -88,13 +101,6 @@ export const PokemonList = styled.li<PokemonListProps>`
         border-bottom-left-radius: 0;
         margin-bottom: 0;
         border-radius: 0.5rem;
-
-        img {
-			    width: 100%;
-          height: 100%;
-			    border-radius: 50%;
-      
-		    }
 
         span {
           padding-right: 0.5rem;
