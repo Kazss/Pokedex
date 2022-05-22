@@ -1,4 +1,4 @@
-import Image from 'next/image';
+/* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
 import { usePokemon } from '../../hooks/usePokemon';
 import { NavigationList, PokemonList } from './styles';
@@ -29,7 +29,7 @@ export function ListCard({ pokemonList }: ListCardProps) {
       <ul>
         {pokemonList?.map(pokemon => (
           <PokemonList WhichPokemon={activePokemon} pokemonType={pokemon.name} onClick={() => handleAddPokeName(pokemon.name)} key={pokemon.name}>
-            <Image src={pokemon.urlImage} alt={pokemon.name} height={50} width={50} />
+            <img src={pokemon.urlImage} alt={pokemon.name} height={50} width={50} />
             <span>{pokemon.name}</span>
           </PokemonList>
         ))}

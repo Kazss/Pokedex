@@ -72,11 +72,7 @@ export const PokemonList = styled.li<PokemonListProps>`
 		&:hover {
 			transform: scale(1.10);
 		}
-		img {
-			width: 25%;
-			border-radius: 50%;
-      
-		}
+    
 		span {
       font-size: 0.8rem;
 			padding: 0 0.7rem;

@@ -84,7 +84,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const pokemonList = filteredPokemonList;
 
-  console.log(pokemonList)
 
   return {
     props: {
