@@ -8,6 +8,7 @@ import Switch from 'react-switch';
 import styles from '../styles/home.module.scss';
 import { ThemeContext } from 'styled-components';
 import { useContext } from 'react';
+import { MdOutlineLightMode, MdOutlineDarkMode } from 'react-icons/md'
 
 interface IPokemonList {
   name: string;
@@ -40,19 +41,23 @@ export default function Home({ pokemonList, toggleTheme }: HomeProps) {
       <main className={styles.contentContainer}>
         <Card />
         <ListCard pokemonList={pokemonList} />
-        <label>
-          <Switch
-            onChange={toggleTheme}
-            checked={title === 'dark'}
-            checkedIcon={false}
-            uncheckedIcon={false}
-            height={10}
-            width={40}
-            handleDiameter={20}
-            offColor={'#005'}
-            onColor={'#fff'}
-          />
-        </label>
+        <div className={styles.toggleContainer}>
+          {title === 'light' ? <MdOutlineLightMode /> : <MdOutlineDarkMode color="#fff" />}
+          <label>
+            <Switch
+              onChange={toggleTheme}
+              checked={title === 'dark'}
+              checkedIcon={false}
+              uncheckedIcon={false}
+              height={10}
+              width={40}
+              handleDiameter={20}
+              offColor='#393E41'
+              onColor='#DADFE8'
+            />
+          </label>
+        </div>
+
 
       </main>
 

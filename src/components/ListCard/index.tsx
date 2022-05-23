@@ -22,7 +22,6 @@ export function ListCard({ pokemonList }: ListCardProps) {
   function handleAddPokeName(PokemonDataName: string) {
     setActivePokemon(PokemonDataName);
     putPokemonName(PokemonDataName);
-    console.log(pokemonName);
   }
 
   return (

@@ -36,7 +36,7 @@ export const NavigationList = styled.nav`
   }
 
   @media (max-width: 720px) {
-    max-width: 15.875rem;
+    max-width: 12.875rem;
 
     ul {
         display: flex;
@@ -87,7 +87,7 @@ export const PokemonList = styled.li<PokemonListProps>`
       margin-left: 10px;
     }
 		span {
-      font-size: 0.6rem;
+      font-size: 0.63rem;
 		
 		}
 
